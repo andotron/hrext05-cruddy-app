@@ -33,6 +33,7 @@ $(document).ready(function(){
     var curTextValue = $('#theKey').val(); // reading from <input>
     var curKeyValue = "theKey"; // change to dynamic key?
     localStorage.setItem(curKeyValue + localeKeyGen(), curTextValue);
+    console.log("after...", window.localStorage);
     $(".show-text").append(curTextValue);
   });
 
@@ -60,7 +61,11 @@ edit individual items
   iterate through local memory and log updated list on screen.
 helper functions
   -a helper function which assigns a random number to theKey. Helps to give our local storage unique keys
+      use a closure function and append to the curKeyVal.
   -a helper function which loops through local memory and logs the values
+      localStorage.key(index) -> gives you the key @ index
+      localStorage.length -> gives you the length
+      localStorage.getItem(index) -> gives you the value @ index
 */
 
 
