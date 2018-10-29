@@ -22,6 +22,13 @@ var localeKeyGen = keyGen(); //have localStorage.setItem call this
 //only problem with that is, if the user inputs the same thing? that would not duplicate
 //
 
+//function which displays a refreshed feed with updated values from localMemory
+var updateFeed = function(storage) {
+  var length = storage.length;
+  for (var i = 0; i < length; i++) {
+    console.log(localStorage.getItem(storage.key(i))); //APPEND THIS TO SHOWTEXT
+  }
+}
 
 
 $(document).ready(function(){
