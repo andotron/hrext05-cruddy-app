@@ -52,12 +52,20 @@ $(document).ready(function(){
   // remove item from app
 
   // listen for click event (del)
-  $(".clear-cache-btn").on("click", function(){
+  $(".clear-cache-btn").on("click", function() {
     // clear local storage
     localStorage.clear();
     $(".show-text").empty();
     updateFeed(localStorage);
   });
+
+  //delete button
+  $(".del").on("click", function() {
+    $(".show-text").empty();
+    var $delTarget = $('#theKey').val();
+    localStorage.removeItem("" + $delTarget);
+    updateFeed(localStorage);
+  })
 
 });
 
@@ -66,7 +74,7 @@ create individual items //done
   we need unique key names so that key values will be stored to the local memory without overriding
   iterate through local memory and log updated list on screen.  
 
-delete individual items
+delete individual items //done
   remove the text from screen
   can target unique key names and delete using localStorage.removeItem()
   iterate through local memory and log updated list on screen.
