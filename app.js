@@ -32,6 +32,10 @@ var updateFeed = function(storage) {
   }
 }
 
+var editBox = function() {
+  var newVal = prompt("Change your item");
+  return newVal;
+}
 
 
 $(document).ready(function(){
@@ -47,6 +51,7 @@ $(document).ready(function(){
     console.log("after...", window.localStorage);
     // $(".show-text").append(curTextValue);
     updateFeed(localStorage);
+    $("#theKey").val(''); // clears input box
   });
 
   // remove item from app
@@ -61,11 +66,24 @@ $(document).ready(function(){
 
   //delete button
   $(".del").on("click", function() {
-    $(".show-text").empty();
-    var $delTarget = $('#theKey').val();
+    var $delTarget = $("#theKey").val()
+    $(".show-text").empty();;
     localStorage.removeItem("" + $delTarget);
     updateFeed(localStorage);
+    $("#theKey").val(''); //clears input box
+
   })
+
+  //edit
+  $(".show-text").on("click", ".item", function(e) {
+    $(".show-text").empty();
+    var clicked = e.target.innerText; //targets divs innerText
+    console.log(clicked);
+    localStorage.removeItem('' + clicked); //removes
+    var newVal = editBox(); //return value of user input
+    localStorage.setItem(newVal, newVal);
+    updateFeed(localStorage);
+  })   
 
 });
 
