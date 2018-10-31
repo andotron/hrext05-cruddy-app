@@ -40,57 +40,95 @@ var editBox = function() {
   return newVal;
 }
 
+/* start with something simple
+a function which creates an item object 
+first argument = name of task
+date created = Date
+*/
+var Item = function(itemName) {
+  var newObj = {}
+  newObj.name = itemName;
+  newObj.dateCreated = Date().split(' ').slice(0, 5).join(' ');
+  newObj.isComplete = false;
+  return newObj;
+}
 
+/*need a new refresh feed
+  iterate over items(objects) in localstorage
+  append each item to show-text
+  newobj.name + newobj.dateCreated 
+*/
+
+var update = function(storage) {
+  var length = storage.length;
+  for (var i = 0; i < storage.length; i++) {
+    var parse = JSON.parse((localStorage.getItem(storage.key(i))));
+    var $itemDiv = $('<div class="item"></div>');
+    $itemDiv.html(
+      '<span class="text">' + parse.name + '</span>' + ' ' + //make name big css
+      '<span class="date">' + parse.dateCreated + '</span>');   //make date small css
+    $(".show-text").append($itemDiv);
+  }
+}
 
 
 $(document).ready(function(){
   console.log("before\n", window.localStorage);
-  updateFeed(localStorage);
+  update(localStorage);
   console.log(window.localeStorage);
-  // add event listener
   $(".add-text-btn").on("click", function(){
     $(".show-text").empty();
-    var curTextValue = $('#theKey').val(); // reading from <input>
-    var curKeyValue = $('#theKey').val(); // change to dynamic key? reads user input also. no dupes only downside is, autosorts
-    localStorage.setItem(curKeyValue, curTextValue);
+    var $input = $("#theKey").val() //input value
+    var theObj = Item($input);
+    var curText = JSON.stringify(theObj);
+    var curKey = theObj.name;
+    localStorage.setItem(curKey, curText);
     console.log("after...", window.localStorage);
-    // $(".show-text").append(curTextValue);
-    updateFeed(localStorage);
+    update(localStorage);
     $("#theKey").val(''); // clears input box
-  });
+  })
 
-  // remove item from app
-
-  // listen for click event (del)
+    // listen for click event (clear storage)
   $(".clear-cache-btn").on("click", function() {
     // clear local storage
     localStorage.clear();
     $(".show-text").empty();
-    updateFeed(localStorage);
+    update(localStorage);
   });
 
-  //delete button
+    //delete button
   $(".del").on("click", function() {
     var $delTarget = $("#theKey").val()
     $(".show-text").empty();;
     localStorage.removeItem("" + $delTarget);
-    updateFeed(localStorage);
+    update(localStorage);
     $("#theKey").val(''); //clears input box
+  });
 
-  })
 
-  //edit
-  $(".show-text").on("click", ".item", function(e) {
+  //change the item name
+  $(".show-text").on("click", ".text", function(e) {
     $(".show-text").empty();
     var clicked = e.target.innerText; //targets divs innerText
-    console.log(clicked);
-    localStorage.removeItem('' + clicked); //removes
     var newVal = editBox(); //return value of user input
-    localStorage.setItem(newVal, newVal);
-    updateFeed(localStorage);
-  })   
+    var editObj = JSON.parse(localStorage[clicked]); //sets value of editObj to object of localStorage(key)
+    editObj.name = newVal;
+    localStorage.setItem(newVal, JSON.stringify(editObj));
+    localStorage.removeItem(clicked);
+    update(localStorage);
+  })  
 
-});
+
+})
+
+
+
+
+
+
+
+
+
 
 /*
 create individual items //done
@@ -122,50 +160,6 @@ maybe add a constructor function which saves an item as an object with props
 
 */
 
-
-
-// /* start with something simple
-// a function which creates an item object 
-// first argument = name of task
-// date created = Date
-// */
-// var Item = function(itemName) {
-//   var newObj = {}
-//   newObj.name = itemName;
-//   newObj.dateCreated = Date();
-//   newObj.isComplete = false;
-//   return newObj;
-// }
-
-// /*need a new refresh feed
-//   iterate over items(objects) in localstorage
-//   append each item to show-text
-//   newobj.name + newobj.dateCreated 
-// */
-
-// var update = function(storage) {
-//   var length = storage.length;
-//   for (var i = 0; i < storage.length; i++) {
-//     var parse = JSON.parse((localStorage.getItem(storage.key(i))));
-//     var $itemDiv = $('<div class="item"></div>');
-//     $itemDiv.html(parse.name + ' - ' + parse.dateCreated);   
-//     $(".show-text").append($itemDiv);
-//   }
-// }
-
-
-// $(document).ready(function(){
-//   $(".add-item").on("click", function(){
-//     $(".show-text").empty();
-//     var $input = $("#theKey").val() //input value
-//     var theObj = Item($input);
-//     var curText = JSON.stringify(theObj);
-//     var curKey = theObj.name;
-//     localStorage.setItem(curKey, curText);
-//     console.log("after...", window.localStorage);
-//     update(localStorage);
-//   })
-// })
 
 
 

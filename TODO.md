@@ -32,4 +32,4 @@
 - [ ] bootstrap/material (css library)
 
 #### My Spin
-(to be filled out by you)
+(Used helper functions :))
