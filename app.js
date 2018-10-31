@@ -23,6 +23,9 @@ var localeKeyGen = keyGen(); //have localStorage.setItem call this
 //
 
 //function which displays a refreshed feed with updated values from localMemory by creating html elements
+
+var theDate = Date().split(' ').slice(0, 5).join(' '); //shows the date
+
 var updateFeed = function(storage) {
   var length = storage.length;
   for (var i = 0; i < length; i++) {
@@ -36,6 +39,8 @@ var editBox = function() {
   var newVal = prompt("Change your item");
   return newVal;
 }
+
+
 
 
 $(document).ready(function(){
@@ -110,7 +115,57 @@ helper functions //done
       localStorage.key(index) -> gives you the key @ index
       localStorage.length -> gives you the length
       localStorage.getItem(index) -> gives you the value @ index
+
+
+Ideas for a V2
+maybe add a constructor function which saves an item as an object with props
+
 */
+
+
+
+// /* start with something simple
+// a function which creates an item object 
+// first argument = name of task
+// date created = Date
+// */
+// var Item = function(itemName) {
+//   var newObj = {}
+//   newObj.name = itemName;
+//   newObj.dateCreated = Date();
+//   newObj.isComplete = false;
+//   return newObj;
+// }
+
+// /*need a new refresh feed
+//   iterate over items(objects) in localstorage
+//   append each item to show-text
+//   newobj.name + newobj.dateCreated 
+// */
+
+// var update = function(storage) {
+//   var length = storage.length;
+//   for (var i = 0; i < storage.length; i++) {
+//     var parse = JSON.parse((localStorage.getItem(storage.key(i))));
+//     var $itemDiv = $('<div class="item"></div>');
+//     $itemDiv.html(parse.name + ' - ' + parse.dateCreated);   
+//     $(".show-text").append($itemDiv);
+//   }
+// }
+
+
+// $(document).ready(function(){
+//   $(".add-item").on("click", function(){
+//     $(".show-text").empty();
+//     var $input = $("#theKey").val() //input value
+//     var theObj = Item($input);
+//     var curText = JSON.stringify(theObj);
+//     var curKey = theObj.name;
+//     localStorage.setItem(curKey, curText);
+//     console.log("after...", window.localStorage);
+//     update(localStorage);
+//   })
+// })
 
 
 
