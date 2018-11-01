@@ -8,7 +8,10 @@ update display with new text value
 
 var editBox = function() {
   var newVal = prompt("Please enter a new Value");
-  return newVal;
+  if(newVal !== '') {
+    return newVal;
+  }
+  return newVal + editBox();
 }
 
 var Item = function(itemName) {
