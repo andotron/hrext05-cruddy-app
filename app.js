@@ -5,46 +5,12 @@ update display with new text value
 */
 
 
-//dynamically assigning keys //only problem is, when you refresh. closure variables is lost and count starts at 1
-var keyGen = function() {
-  var key = 0;
-
-  return function() {
-    key++;
-    return key;
-  };
-}
-
-var localeKeyGen = keyGen(); //have localStorage.setItem call this
-
-//or we can just name the key the value of user input
-//curKeyValue = $('#theKey').val();
-//only problem with that is, if the user inputs the same thing? that would not duplicate
-//
-
-//function which displays a refreshed feed with updated values from localMemory by creating html elements
-
-var theDate = Date().split(' ').slice(0, 5).join(' '); //shows the date
-
-var updateFeed = function(storage) {
-  var length = storage.length;
-  for (var i = 0; i < length; i++) {
-    var $itemDiv = $('<div class="item"></div>')     
-    $itemDiv.html(localStorage.getItem(storage.key(i)));
-    $(".show-text").append($itemDiv);
-  }
-}
 
 var editBox = function() {
-  var newVal = prompt("Change your item");
+  var newVal = prompt("Please enter a new Value");
   return newVal;
 }
 
-/* start with something simple
-a function which creates an item object 
-first argument = name of task
-date created = Date
-*/
 var Item = function(itemName) {
   var newObj = {}
   newObj.name = itemName;
@@ -53,18 +19,22 @@ var Item = function(itemName) {
   return newObj;
 }
 
-/*need a new refresh feed
-  iterate over items(objects) in localstorage
-  append each item to show-text
-  newobj.name + newobj.dateCreated 
+/*
+need a new refresh feed
+iterate over items(objects) in localstorage
+append each item to show-text
+newobj.name + newobj.dateCreated 
 */
 
+//function which displays a refreshed feed with updated values 
+//from localMemory by creating html elements
 var update = function(storage) {
   var length = storage.length;
   for (var i = 0; i < storage.length; i++) {
     var parse = JSON.parse((localStorage.getItem(storage.key(i))));
     var $itemDiv = $('<div class="item"></div>');
     $itemDiv.html(
+      '<button class="btn btn-danger btn-sm" id="del-item">Delete</button>' + //adds a delete button
       '<span class="text">' + parse.name + '</span>' + ' ' + //make name big css
       '<span class="date">' + parse.dateCreated + '</span>');   //make date small css
     $(".show-text").append($itemDiv);
@@ -76,7 +46,7 @@ $(document).ready(function(){
   console.log("before\n", window.localStorage);
   update(localStorage);
   console.log(window.localeStorage);
-  $(".add-text-btn").on("click", function(){
+  $("#add-text-btn").on("click", function(){
     $(".show-text").empty();
     var $input = $("#theKey").val() //input value
     var theObj = Item($input);
@@ -88,17 +58,17 @@ $(document).ready(function(){
     $("#theKey").val(''); // clears input box
   })
 
-    // listen for click event (clear storage)
-  $(".clear-cache-btn").on("click", function() {
+  // listen for click event (clear storage)
+  $("#clear-cache-btn").on("click", function() {
     // clear local storage
     localStorage.clear();
     $(".show-text").empty();
     update(localStorage);
   });
 
-    //delete button
-  $(".del").on("click", function() {
-    var $delTarget = $("#theKey").val()
+  //delete button
+  $(".show-text").on("click", "#del-item", function() {
+    var $delTarget = $(".text").html();
     $(".show-text").empty();;
     localStorage.removeItem("" + $delTarget);
     update(localStorage);
@@ -140,6 +110,8 @@ delete individual items //done
   can target unique key names and delete using localStorage.removeItem()
   iterate through local memory and log updated list on screen.
 
+delete by clicking a box?(tentative)  
+
 edit individual items
   access the localmemory to edit the key holding the item you want to change and set a new value equal to it
   onclick popup box, enter new value;
@@ -154,9 +126,6 @@ helper functions //done
       localStorage.length -> gives you the length
       localStorage.getItem(index) -> gives you the value @ index
 
-
-Ideas for a V2
-maybe add a constructor function which saves an item as an object with props
 
 */
 
