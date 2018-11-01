@@ -5,7 +5,6 @@ update display with new text value
 */
 
 
-
 var editBox = function(name) {
   var newVal = prompt("Please enter a new Value");
   var oldVal = name;
@@ -20,6 +19,7 @@ var editBox = function(name) {
 
 var Item = function(itemName) {
   var newObj = {}
+  newObj.id = 
   newObj.name = itemName;
   newObj.dateCreated = Date().split(' ').slice(0, 5).join(' ');
   newObj.isComplete = false;
@@ -41,7 +41,7 @@ var update = function(storage) {
     var parse = JSON.parse((localStorage.getItem(storage.key(i))));
     var $itemDiv = $('<div class="item"></div>');
     $itemDiv.html(
-      '<button class="btn btn-danger btn-sm" id="del-item">Delete</button>' + //adds a delete button
+      '<button class="btn btn-danger btn-sm del-item" number=' + i + '>Delete</button>' + //adds a delete button
       '<span class="text">' + parse.name + '</span>' + ' ' + //make name big css
       '<span class="date">' + parse.dateCreated + '</span>');   //make date small css
     $(".show-text").append($itemDiv);
@@ -74,10 +74,13 @@ $(document).ready(function(){
   });
 
   //delete button
-  $(".show-text").on("click", "#del-item", function() {
-    var $delTarget = $(".text").html();
-    $(".show-text").empty();;
-    localStorage.removeItem("" + $delTarget);
+  $(".show-text").on("click", ".del-item", function() {
+    var numberClick = $(this).attr("number") //what you click on
+    console.log(numberClick);
+    var that = this;
+    console.log(that);
+    $(".show-text").empty();
+    localStorage.removeItem(localStorage.key(numberClick));
     update(localStorage);
     $("#theKey").val(''); //clears input box
   });
