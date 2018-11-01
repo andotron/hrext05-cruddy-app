@@ -1,0 +1,13 @@
+.date {
+	float: right;
+	font-size: 8pt;
+}
+
+.text {
+	font-size: 16pt;
+	margin-left: 10px;
+}
+
+h1 {
+	text-align: center;
+}
