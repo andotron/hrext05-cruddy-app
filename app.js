@@ -6,12 +6,16 @@ update display with new text value
 
 
 
-var editBox = function() {
+var editBox = function(name) {
   var newVal = prompt("Please enter a new Value");
+  var oldVal = name;
+  if(newVal === null) {
+    return oldVal;
+  }
   if(newVal !== '') {
     return newVal;
   }
-  return newVal + editBox();
+  return newVal + editBox(oldVal);
 }
 
 var Item = function(itemName) {
@@ -83,12 +87,17 @@ $(document).ready(function(){
   $(".show-text").on("click", ".text", function(e) {
     $(".show-text").empty();
     var clicked = e.target.innerText; //targets divs innerText
-    var newVal = editBox(); //return value of user input
+    var newVal = editBox(clicked); //return value of user input
+    console.log(newVal)
     var editObj = JSON.parse(localStorage[clicked]); //sets value of editObj to object of localStorage(key)
     editObj.name = newVal;
     localStorage.setItem(newVal, JSON.stringify(editObj));
-    localStorage.removeItem(clicked);
-    update(localStorage);
+    if(newVal === clicked) {
+      update(localStorage);
+    } else {
+      localStorage.removeItem(clicked);
+      update(localStorage);
+    }
   })  
 
 
