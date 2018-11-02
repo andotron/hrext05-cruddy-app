@@ -17,14 +17,15 @@ var editBox = function(name) {
   return newVal + editBox(oldVal);
 }
 
+//can add more features by inserting more properties into this constructor
 var Item = function(itemName) {
   var newObj = {}
-  newObj.id = 
   newObj.name = itemName;
   newObj.dateCreated = Date().split(' ').slice(0, 5).join(' ');
-  newObj.isComplete = false;
   return newObj;
 }
+
+
 
 /*
 need a new refresh feed
@@ -75,10 +76,7 @@ $(document).ready(function(){
 
   //delete button
   $(".show-text").on("click", ".del-item", function() {
-    var numberClick = $(this).attr("number") //what you click on
-    console.log(numberClick);
-    var that = this;
-    console.log(that);
+    var numberClick = $(this).attr("number") //what you click on the number attribute
     $(".show-text").empty();
     localStorage.removeItem(localStorage.key(numberClick));
     update(localStorage);
@@ -123,7 +121,9 @@ create individual items //done
 delete individual items //done
   remove the text from screen
   can target unique key names and delete using localStorage.removeItem()
+  take value from input box and delete via localStorage.removeItem()
   iterate through local memory and log updated list on screen.
+
 
 delete by clicking a box?(tentative)  
 
@@ -140,6 +140,11 @@ helper functions //done
       localStorage.key(index) -> gives you the key @ index
       localStorage.length -> gives you the length
       localStorage.getItem(index) -> gives you the value @ index
+
+More user friendly delete buttons
+  delete button now deletes item to the right on press!
+  +10 UI/UX points
+
 
 
 */

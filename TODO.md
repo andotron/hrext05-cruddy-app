@@ -29,7 +29,7 @@
 #### Potential Libraries
 - [ ] lodash/underscore
 - [ ] jquery ui
-- [ ] bootstrap/material (css library)
+- [x] bootstrap/material (css library)
 
 #### My Spin
 (Used helper functions :))

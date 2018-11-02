@@ -1,13 +1,41 @@
+/*Type*/
+
+.container h1 {
+	text-align: center;
+	color: #fff;
+}	
+
+body {
+	background-image: url(background.png);
+	background-size: cover;
+}
+
+/*class*/
+
 .date {
 	float: right;
 	font-size: 8pt;
+	color: #fff;
 }
 
 .text {
-	font-size: 16pt;
-	margin-left: 10px;
+	font-size: 20pt;
+	margin: 10px;
+	color: #fff;
 }
 
-h1 {
-	text-align: center;
+.item {
+	background-color: rgba(3,3,3, .2);
 }
+
+#add-text-btn {
+	margin-bottom: 5px;
+}
+
+#clear-cache-btn {
+	margin-bottom: 5px;
+}
+
+/*#boot-strap-override {
+	background-color: #000;
+}*/
