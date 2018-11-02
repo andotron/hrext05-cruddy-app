@@ -19,7 +19,7 @@ body {
 }
 
 .text {
-	font-size: 20pt;
+	font-size: 18pt;
 	margin: 10px;
 	color: #fff;
 }
@@ -28,6 +28,8 @@ body {
 	background-color: rgba(3,3,3, .2);
 }
 
+/*id*/
+
 #add-text-btn {
 	margin-bottom: 5px;
 }
@@ -35,7 +37,3 @@ body {
 #clear-cache-btn {
 	margin-bottom: 5px;
 }
-
-/*#boot-strap-override {
-	background-color: #000;
-}*/

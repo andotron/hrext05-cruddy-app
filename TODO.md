@@ -2,7 +2,7 @@
 
 #### Basic Improvments (requirements)
 
-- [ ] create indivdiual items
+- [ ] create individual items
 - [ ] delete individual items
 - [ ] edit individual items
 
@@ -32,4 +32,6 @@
 - [x] bootstrap/material (css library)
 
 #### My Spin
-(Used helper functions :))
+Used helper functions :)
+Incorporated a prompt for edits
+

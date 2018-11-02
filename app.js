@@ -1,10 +1,4 @@
-/*
-listen for click event (edit)
-update text in local storage (with key)
-update display with new text value
-*/
-
-
+//uses recursion to edit a todo item
 var editBox = function(name) {
   var newVal = prompt("Please enter a new Value");
   var oldVal = name;
@@ -27,13 +21,6 @@ var Item = function(itemName) {
 
 
 
-/*
-need a new refresh feed
-iterate over items(objects) in localstorage
-append each item to show-text
-newobj.name + newobj.dateCreated 
-*/
-
 //function which displays a refreshed feed with updated values 
 //from localMemory by creating html elements
 var update = function(storage) {
@@ -53,7 +40,6 @@ var update = function(storage) {
 $(document).ready(function(){
   console.log("before\n", window.localStorage);
   update(localStorage);
-  console.log(window.localeStorage);
   $("#add-text-btn").on("click", function(){
     $(".show-text").empty();
     var $input = $("#theKey").val() //input value
@@ -64,7 +50,7 @@ $(document).ready(function(){
     console.log("after...", window.localStorage);
     update(localStorage);
     $("#theKey").val(''); // clears input box
-  })
+  });
 
   // listen for click event (clear storage)
   $("#clear-cache-btn").on("click", function() {
@@ -99,13 +85,10 @@ $(document).ready(function(){
       localStorage.removeItem(clicked);
       update(localStorage);
     }
-  })  
+  });  
 
 
-})
-
-
-
+});
 
 
 
@@ -113,7 +96,12 @@ $(document).ready(function(){
 
 
 
-/*
+
+
+
+/* 
+  **changelog // planning **
+
 create individual items //done
   we need unique key names so that key values will be stored to the local memory without overriding
   iterate through local memory and log updated list on screen.  
@@ -125,9 +113,13 @@ delete individual items //done
   iterate through local memory and log updated list on screen.
 
 
-delete by clicking a box?(tentative)  
+delete by clicking a box?(tentative) //done 
+  More user friendly delete buttons 
+    delete button now deletes item to the right on press!
+    +10 UI/UX points!
 
-edit individual items
+
+edit individual items //done
   access the localmemory to edit the key holding the item you want to change and set a new value equal to it
   onclick popup box, enter new value;
   iterate through local memory and log updated list on screen.
@@ -141,10 +133,8 @@ helper functions //done
       localStorage.length -> gives you the length
       localStorage.getItem(index) -> gives you the value @ index
 
-More user friendly delete buttons
-  delete button now deletes item to the right on press!
-  +10 UI/UX points
-
+future features to add
+  sort list by time added.
 
 
 */
