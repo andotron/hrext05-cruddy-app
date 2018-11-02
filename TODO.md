@@ -2,15 +2,15 @@
 
 #### Basic Improvments (requirements)
 
-- [ ] create individual items
-- [ ] delete individual items
-- [ ] edit individual items
+- [x] create individual items
+- [x] delete individual items
+- [x] edit individual items
 
 ##### Notes
-- [ ] Keep DOM and localStorage matching 
-- [ ] Remember event Delegation when adding new items to .show-text
-- [ ] make sure we do not duplicate data
-- [ ] add different values to the item
+- [x] Keep DOM and localStorage matching 
+- [x] Remember event Delegation when adding new items to .show-text
+- [x] make sure we do not duplicate data
+- [x] add different values to the item
 
   ex.
 ```javascript
@@ -32,6 +32,8 @@
 - [x] bootstrap/material (css library)
 
 #### My Spin
-Used helper functions :)
-Incorporated a prompt for edits
+[x]Use Class helper function to create new Objs:)
+[x]Incorporated a prompt for edits.
+[x]Advanced delete button.
+[x]Incorporate recursion.
 
