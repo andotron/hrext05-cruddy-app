@@ -3,6 +3,9 @@
 .container h1 {
 	text-align: center;
 	color: #fff;
+	margin-top: 80px; 
+	margin-bottom: 50px;
+	font-size: 52pt;
 }	
 
 body {
